@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+<head>
+<title>
+draganddrop
+</title>
+
+<style>
+    #div1, #div2, #div3 {
+      float: left;
+      width: 100px;
+      height: 105px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid black;
+    }
+    </style>
+</head>
+<script>
+  var hell=[];
+  var hell1=[];
+  var hell2=[];
+alert("Hello");
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+  
+function drag(ev) {
+    console.log(ev.target.id);
+    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData("text1",ev.target.parentNode.id);
+  }
+  
+function drop(ev) {
+    ev.preventDefault();
+    var a=ev.target.id;
+    //console.log(type);
+    var b=ev.dataTransfer.getData("text");
+    var c=ev.dataTransfer.getData("text1");
+    console.log(a+"drop parent element");
+    console.log(b+"drag element");
+    console.log(c+"drag parent element");
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+    if(a=="div1")
+    {
+      console.log("hello");
+      if(c=="div2")
+      {
+        console.log(b);
+        console.log(hell1.length);
+        for(var j=0;j<hell1.length;j++)
+        {
+          //console.log(hell1[i]);
+          //console.log(hell1[i]["id"]);
+          console.log(j);
+          if(hell1[j]["id"]==b)
+          {
+            console.log(j);
+            hell.push(hell1[j]);
+            hell1.splice(j-1,1);
+           //var r= hell1.remove(i);
+           //console.log(r+"  jnxjnjnsx");
+           break;
+          }
+        }
+        //hell.push(r);
+      }
+      if(c=="div3")
+      {
+        console.log(b);
+        for(var j=0;j<hell2.length;j++)
+        {
+          //console.log(hell2[i]);
+          //console.log(hell2[i]["id"]);
+          if(hell2[j]["id"]==b)
+          {
+            console.log(j);
+            hell.push(hell2[j]);
+            hell2.splice(j-1,1);
+           //var r= hell2.remove(i);
+           //console.log(r+"  jnxjnjnsx");
+           break;
+          }
+        }
+        //hell.push(r);
+      }
+
+    }
+    if(a=="div2")
+    {
+      if(c=="div3")
+      {
+        console.log(b);
+        for(var i=0;i<hell2.length;i++)
+        {
+          //console.log(hell2[i]);
+          //console.log(hell2[i]["id"]);
+          if(hell2[i]["id"]==b)
+          {
+            console.log(i);
+            hell1.push(hell2[i]);
+            hell2.splice(i-1,1);
+           //console.log(r+"  jnxjnjnsx");
+           break;
+          }
+        }
+        //hell1.push(r);
+      }
+      if(c=="div1")
+      {
+        console.log(b);
+        for(var i=0;i<hell.length;i++)
+        {
+          console.log(i);
+          //console.log(hell[i]);
+          //console.log(hell[i]["id"]);
+          
+          if(hell[i]["id"]==b)
+          {
+            console.log(i);
+            hell1.push(hell[i]);
+            //hell.remove(i);
+            hell.splice(i-1,1);
+           //console.log(r+"  jnxjnjnsx");
+           
+           break;
+          }
+        }
+        
+      }
+      
+
+    }
+    
+    if(a=="div3")
+    {
+
+      if(c=="div1")
+      {
+        console.log(b);
+        for(var i=0;i<hell.length;i++)
+        {
+          //console.log(hell[i]);
+          //console.log(hell[i]["id"]);
+          if(hell[i]["id"]==b)
+          {
+            console.log(i);
+            hell2.push(hell[i]);
+            hell.splice(i-1,1);
+           /*var r= hell.remove(i);
+           console.log(r+"  jnxjnjnsx");*/
+           break;
+          }
+        }
+        //hell2.push(r);
+      }
+      if(c=="div2")
+      {
+        console.log(b);
+        for(var i=0;i<hell1.length;i++)
+        {
+          //console.log(hell1[i]);
+          //console.log(hell1[i]["id"]);
+          if(hell1[i]["id"]==b)
+          {
+            console.log(i);
+            hell2.push(hell1[i]);
+            hell1.splice(i-1,1);
+           //console.log(r+"  jnxjnjnsx");
+           break;
+          }
+        }
+        //hell2.push(r);
+      }
+
+    }
+    
+  }
+function a(){
+    document.forms[0].style.display="block";
+}
+var kk=0;
+function b()
+{
+    alert("h");
+    //
+    var p="d"+kk;
+    kk++;
+    var h1={work:document.getElementById("t1").value,
+    type:document.getElementById("t2").value,
+    place:document.getElementById("t3").value,
+    id:p};
+    
+    if(document.getElementById("t2").value=="Nec")
+    {
+      var d=document.createElement("div");
+      
+      console.log(p);
+      d.setAttribute("id",p);
+      d.setAttribute("draggable",true);
+      d.setAttribute("ondragstart","drag(event)");
+      d.innerHTML="Your Work "+document.getElementById("t1").value+" Your Work Type:"+document.getElementById("t2").value+"  Place:"+document.getElementById("t3").value;
+      document.getElementById("div1").appendChild(d);
+      hell.push(h1);
+    }
+    else if(document.getElementById("t2").value=="Aro")
+    {
+      var d=document.createElement("div");
+      /*var p="d"+i;
+      i++;*/
+      console.log(p);
+      d.setAttribute("id",p);
+      d.setAttribute("draggable",true);
+      d.setAttribute("ondragstart","drag(event)");
+      d.innerHTML="Your Work "+document.getElementById("t1").value+" Your Work Type:"+document.getElementById("t2").value+"  Place:"+document.getElementById("t3").value;
+      document.getElementById("div2").appendChild(d);
+      hell1.push(h1);
+    }
+    else if(document.getElementById("t2").value=="Mis")
+    {
+      var d=document.createElement("div");
+      /*var p="d"+i;
+      i++;*/
+      console.log(p);
+      d.setAttribute("id",p);
+      d.setAttribute("draggable",true);
+      d.setAttribute("ondragstart","drag(event)");
+      d.innerHTML="Your Work "+document.getElementById("t1").value+" Your Work Type:"+document.getElementById("t2").value+"  Place:"+document.getElementById("t3").value;
+      document.getElementById("div3").appendChild(d);
+      hell2.push(h1);
+    }
+    document.forms[0].reset();
+    //document.forms[0].style.display="block";
+    //c();
+}
+  </script>
+
+<body>
+
+<form action="javascript:void(0)"name="n1" style="display:none;" id="f" >
+<input name="i1" type="text"  id="t1" placeholder="Work Name"/>
+<input name="i2" type="text" id="t2" placehloder="Work Type"/>
+<input name="i3" type="text" id="t3" placeholder="Place"/>
+<br>
+<button type="submit" onclick="b()">Submit</button>
+</form>
+<button onclick="a()">
+    +
+</button>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <!--<img src="img_w3slogo.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">-->
+        <div id="in1"draggable="true" ondragstart="drag(event)" style="background-color:blue;height:30px;width:20px;"></div>
+        <div id="in2"draggable="true" ondragstart="drag(event)" style="background-color:red;height:30px;width:50px;"></div>
+      </div>
+      
+      <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</body>
+</html>
